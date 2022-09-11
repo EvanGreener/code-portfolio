@@ -2,7 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { text } from 'stream/consumers'
 
 type NavButtonProps = {
    href: string
@@ -18,30 +17,18 @@ type NavElement = {
 }
 
 const navElements: NavElement[] = [
-   { text: 'Evan Greesntein', href: '/', isMain: true },
-   { text: 'About Me', href: '/about', isMain: false },
-   { text: 'Projects', href: '/projects', isMain: false },
+   { text: 'Evan Greesntein', href: '#', isMain: true },
+   { text: 'About Me', href: '#about', isMain: false },
+   { text: 'Experience', href: '#experiece', isMain: false },
+   { text: 'Projects', href: '#projects', isMain: false },
 ]
 
-// eslint-disable-next-line react/display-name
-const NavButton = React.forwardRef<HTMLAnchorElement, NavButtonProps>(
-   ({ href, text, onClick, mobile, isMain }, ref) => {
-      let classes = 'text-lg p-1 rounded-lg hover:bg-gray-700'
-      classes = isMain ? 'text-2xl font-bold' : classes
-      classes += !mobile && !isMain ? 'hidden sm:block' : ''
-
-      return (
-         <Link href="/about" passHref>
-            <a href={href} ref={ref} onClick={onClick} className={classes}>
-               {text}
-            </a>
-         </Link>
-      )
-   }
-)
 const Navbar = () => {
    return (
-      <Disclosure as="nav" className="bg-gray-800 py-3 px-6 space-x-6">
+      <Disclosure
+         as="nav"
+         className="bg-gray-800 py-3 px-6 space-x-6 rounded-b-md text-white"
+      >
          {({ open }) => (
             <>
                <Disclosure.Button>
