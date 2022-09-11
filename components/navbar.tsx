@@ -1,14 +1,6 @@
 import Link from 'next/link'
-import React from 'react'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-
-type NavButtonProps = {
-   href: string
-   text: string
-   onClick: React.MouseEventHandler
-   mobile: boolean
-}
 
 type NavElement = {
    text: string
