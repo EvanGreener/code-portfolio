@@ -35,7 +35,6 @@ const Navbar = ({ navElements }: NavbarProps) => {
                               onClick={() =>
                                  domRef.current?.scrollIntoView({
                                     behavior: 'smooth',
-                                    block: 'start',
                                  })
                               }
                               className={classes}
@@ -50,7 +49,7 @@ const Navbar = ({ navElements }: NavbarProps) => {
                <Disclosure.Panel className="sm:hidden">
                   <div className="space-y-3">
                      {navElements.map((item) => {
-                        const { text, href, isMain } = item
+                        const { text, href, isMain, domRef } = item
                         let classes =
                            'text-lg p-1 rounded-lg hover:bg-gray-700 '
                         classes += isMain ? 'hidden' : ''
@@ -58,7 +57,16 @@ const Navbar = ({ navElements }: NavbarProps) => {
                         return (
                            <div key={href}>
                               <Link href={href}>
-                                 <a className={classes}>{text}</a>
+                                 <a
+                                    onClick={() =>
+                                       domRef.current?.scrollIntoView({
+                                          behavior: 'smooth',
+                                       })
+                                    }
+                                    className={classes}
+                                 >
+                                    {text}
+                                 </a>
                               </Link>
                            </div>
                         )
