@@ -2,25 +2,26 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import Layout from '../components/layout'
-import profile from '../assets/profile.jpg'
 import acnhUI from '../assets/acnh-ui.png'
-import { IconContext } from 'react-icons'
-import { FaReact, FaJava, FaPython, FaLinux } from 'react-icons/fa'
-import {
-   SiJavascript,
-   SiMysql,
-   SiCsharp,
-   SiAndroidstudio,
-} from 'react-icons/si'
+import noImage from '../assets/no-image.jpeg'
 import { RefObject, useRef } from 'react'
 import AboutMe from '../components/about'
 import Experience from '../components/experience'
+import { StaticImageData } from 'next/image'
+import Projects from '../components/projects'
 
 export type NavElement = {
    text: string
    href: string
    isMain: boolean
    domRef: RefObject<HTMLParagraphElement>
+}
+
+export type Project = {
+   title: string
+   image: StaticImageData
+   tags: string
+   link: string
 }
 
 const Home: NextPage = () => {
@@ -49,6 +50,21 @@ const Home: NextPage = () => {
          domRef: projectsRef,
       },
    ]
+
+   const projects: Project[] = [
+      {
+         title: 'Animal Crossing Cheat Sheet (Personal)',
+         image: acnhUI,
+         tags: 'React Typescript Material-UI acnhapi',
+         link: 'https://github.com/EvanGreener/ACNH-Creature-Guide',
+      },
+      {
+         title: 'E-commerce bookstore (Academic)',
+         image: noImage,
+         tags: 'JSF Java xhtml JPA Arquillian Log4J MySQL',
+         link: 'https://github.com/EvanGreener/JSF-e-commerce-site',
+      },
+   ]
    return (
       <Layout navElements={navElements}>
          <Head>
@@ -74,23 +90,7 @@ const Home: NextPage = () => {
              * Projects Section
              *    - Project title + picture + technologies used
              */}
-            <p
-               ref={projectsRef}
-               className="font-bold font-mono text-xl scroll-mt-16"
-            >
-               Projects I&apos;ve worked on
-            </p>
-            <div className="flex flex-col items-center gap-y-2">
-               <p className="underline text-lg text-center font-mono">
-                  Animal Crossing Cheat Sheet (Personal)
-               </p>
-               <div className="w-3/5 sm:w-2/5 hover:blur-sm">
-                  <Image src={acnhUI} alt="Animal crossing project UI" />
-               </div>
-               <code className="text-center">
-                  React Typescript Material-UI acnhapi
-               </code>
-            </div>
+            <Projects projects={projects} projectsRef={projectsRef} />
          </div>
       </Layout>
    )
