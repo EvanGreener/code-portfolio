@@ -68,16 +68,19 @@ const Home: NextPage = () => {
                <Image src={profile} alt="profile pic" layout="responsive" />
             </div>
             <p className="sm:w-1/3 font-mono">
-               >_ A 3rd year software engineering at Concordia University student
-               who&apos;s extremely passionate about programming, computers and
-               engineering. Before studying at Concordia, I completed a computer
-               science DEC at Dawson College.
+               &gt;_ A 3rd year software engineering at Concordia University
+               student who&apos;s extremely passionate about programming,
+               computers and engineering. Before studying at Concordia, I
+               completed a computer science DEC at Dawson College.
             </p>
             {/**
              * Experience Section
              *    - programming languages + frameworks
              */}
-            <p ref={experienceRef} className="font-bold font-mono text-xl scroll-mt-16">
+            <p
+               ref={experienceRef}
+               className="font-bold font-mono text-xl scroll-mt-16"
+            >
                Experience
             </p>
             <IconContext.Provider value={{ size: '4em', color: 'white' }}>
@@ -96,7 +99,10 @@ const Home: NextPage = () => {
              * Projects Section
              *    - Project title + picture + technologies used
              */}
-            <p ref={projectsRef} className="font-bold font-mono text-xl scroll-mt-16">
+            <p
+               ref={projectsRef}
+               className="font-bold font-mono text-xl scroll-mt-16"
+            >
                Projects I&apos;ve worked on
             </p>
             <div className="flex flex-col items-center gap-y-2">
