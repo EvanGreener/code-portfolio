@@ -1,16 +1,20 @@
-import React from 'react'
+import React, { MouseEventHandler, MutableRefObject, Ref, useRef } from 'react'
 import Navbar from './navbar'
 import Footer from './footer'
+import { NavElement } from '../pages'
 
 type LayoutProps = {
    children: React.ReactNode
+   navElements: NavElement[]
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, navElements }: LayoutProps) => {
    return (
       <div className="bg-slate-900">
          <div className="sticky top-0 z-10 ">
-            <Navbar />
+            <Navbar
+               navElements={navElements}
+            />
          </div>
          {children}
          <Footer />

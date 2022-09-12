@@ -1,21 +1,13 @@
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { NavElement } from '../pages'
 
-type NavElement = {
-   text: string
-   href: string
-   isMain: boolean
+type NavbarProps = {
+   navElements: NavElement[]
 }
 
-const navElements: NavElement[] = [
-   { text: 'Evan Greesntein', href: '#', isMain: true },
-   { text: 'About Me', href: '#about', isMain: false },
-   { text: 'Experience', href: '#experiece', isMain: false },
-   { text: 'Projects', href: '#projects', isMain: false },
-]
-
-const Navbar = () => {
+const Navbar = ({ navElements }: NavbarProps) => {
    return (
       <Disclosure
          as="nav"
@@ -31,7 +23,7 @@ const Navbar = () => {
                   )}
                </Disclosure.Button>
                {navElements.map((item) => {
-                  const { text, href, isMain } = item
+                  const { text, href, isMain, domRef } = item
                   let classes =
                      'text-lg p-1 rounded-lg hover:bg-gray-700 hidden sm:inline'
                   classes = isMain ? 'text-2xl font-bold ' : classes
@@ -39,7 +31,17 @@ const Navbar = () => {
                   return (
                      <span key={href}>
                         <Link href={href}>
-                           <a className={classes}>{text}</a>
+                           <a
+                              onClick={() =>
+                                 domRef.current?.scrollIntoView({
+                                    behavior: 'smooth',
+                                    block: 'start',
+                                 })
+                              }
+                              className={classes}
+                           >
+                              {text}
+                           </a>
                         </Link>
                      </span>
                   )

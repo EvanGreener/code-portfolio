@@ -7,24 +7,33 @@ const Footer = () => {
       <footer className="rounded-t-md bg-gray-800 py-3 px-6 text-white">
          <div className="flex flex-row justify-center w-full pb-2">
             <a className="text-lg" href="mailto:evanlg16@gmail.com">
-               {'Contact me: evanlg16@gmail.com'}
+               {'evanlg16@gmail.com'}
             </a>
          </div>
          <div className="flex flex-row justify-center gap-4">
             <IconContext.Provider value={{ color: 'white', size: '3em' }}>
-               <Link href="https://github.com/EvanGreener">
-                  <FaGithub />
+               <Link href="https://github.com/EvanGreener" passHref>
+                  <a>
+                     <FaGithub />
+                  </a>
                </Link>
-               <Link href="https://www.linkedin.com/in/evan-greenstein/">
-                  <FaLinkedin />
+               <Link
+                  href="https://www.linkedin.com/in/evan-greenstein/"
+                  passHref
+               >
+                  <a>
+                     <FaLinkedin />
+                  </a>
                </Link>
-               <Link href="https://www.facebook.com/evan.greenstein2/">
-                  <FaFacebook />
+               <Link href="https://www.facebook.com/evan.greenstein2/" passHref>
+                  <a>
+                     <FaFacebook />
+                  </a>
                </Link>
             </IconContext.Provider>
          </div>
          <p className="flex flex-row justify-center w-full pt-10 text-xs opacity-25">
-            &copy; Evan Greenstein 2022
+            &copy; 2022 Evan Greenstein
          </p>
       </footer>
    )
