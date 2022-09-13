@@ -56,7 +56,7 @@ const Home: NextPage = () => {
          title: 'Animal Crossing Cheat Sheet (Personal)',
          image: acnhUI,
          tags: 'React Typescript Material-UI acnhapi',
-         link: 'https://github.com/EvanGreener/ACNH-Creature-Guide',
+         link: 'https://evangreener.github.io/ACNH-Creature-Guide/',
       },
       {
          title: 'E-commerce bookstore (Academic)',
@@ -82,7 +82,7 @@ const Home: NextPage = () => {
              */}
             <AboutMe aboutRef={aboutRef} />
             {/**
-             * Experience Section
+             * Skills Section
              *    - programming languages + frameworks
              */}
             <Skills skillsRef={skillsRef} />

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { RefObject } from 'react'
 import { Project } from '../pages'
 
@@ -16,18 +17,27 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
          >
             Projects I&apos;ve worked on (side scroll for more)
          </p>
-         <div className="flex flex-row flex-nowrap w-2/3 overflow-x-auto gap-x-10">
+         <div className="flex flex-row flex-nowrap sm:w-2/3 overflow-x-auto gap-y-2 gap-x-10">
             {projects.map((item) => {
                const { title, image, tags, link } = item
                return (
                   <div
                      key={link}
-                     className="flex flex-col flex-none w-fit items-center gap-y-2"
+                     className="flex flex-col flex-none w-fit items-center"
                   >
                      <p className="underline text-lg text-center font-mono">
                         {title}
                      </p>
-                     <div className="sm:w-3/4 hover:blur-sm">
+                     <div className="sm:w-3/4 relative">
+                        <Link href={link} passHref>
+                           <a
+                              className="z-10 rounded-full bg-gray-800 text-white 
+                           px-3 py-2 hover:bg-gray-700 absolute top-1/2 left-1/2 
+                           -translate-x-1/2 -translate-y-1/2"
+                           >
+                              Go to
+                           </a>
+                        </Link>
                         <Image src={image} alt="Project image" />
                      </div>
                      <code className="text-center">{tags}</code>
