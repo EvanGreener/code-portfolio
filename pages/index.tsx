@@ -68,13 +68,13 @@ const Home: NextPage = () => {
    return (
       <Layout navElements={navElements}>
          <Head>
-            <title>{"Evan Greenstein | Portfolio"}</title>
+            <title>{'Evan Greenstein | Portfolio'}</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
 
          <div
             id="content"
-            className="px-10 py-5 gap-y-5 flex flex-col items-center text-white scroll-mt-16"
+            className="px-10 py-5 gap-y-10 flex flex-col items-center text-white scroll-mt-16"
          >
             {/**
              * About me Section

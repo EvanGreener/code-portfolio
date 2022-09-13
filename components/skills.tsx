@@ -68,7 +68,7 @@ const Skills = ({
             Skills
          </p>
          <IconContext.Provider value={{ size: '4em', color: 'white' }}>
-            <div className="flex flex-row flex-wrap justify-center gap-10">
+            <div className="flex flex-row flex-wrap justify-around gap-10">
                {skills.map((item) => {
                   const { skill, icon, blurb } = item
                   return (
@@ -77,7 +77,7 @@ const Skills = ({
                         className="flex flex-col items-center gap-y-4 sm:w-1/4"
                      >
                         {icon}
-                        <p className="text-center font-mono">{blurb}</p>
+                        <p className="text-center text-sm font-mono">{blurb}</p>
                      </div>
                   )
                })}

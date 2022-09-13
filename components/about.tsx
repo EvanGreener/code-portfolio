@@ -20,8 +20,8 @@ const AboutMe = ({
                objectFit="cover"
             />
          </div>
-         <p className="sm:w-1/3 font-mono">
-            <span className="text-2xl font-bold">&gt;_</span> A 3rd year
+         <p className="sm:w-2/5 text-lg font-mono">
+            <span className="text-4xl font-bold">&gt;_</span> A 3rd year
             software engineering at Concordia University student who&apos;s
             extremely passionate about programming, computers and engineering.
             Before studying at Concordia, I completed a computer science DEC
