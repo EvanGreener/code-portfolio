@@ -6,7 +6,7 @@ import acnhUI from '../assets/acnh-ui.png'
 import noImage from '../assets/no-image.jpeg'
 import { RefObject, useRef } from 'react'
 import AboutMe from '../components/about'
-import Skills from '../components/experience'
+import Skills from '../components/skills'
 import { StaticImageData } from 'next/image'
 import Projects from '../components/projects'
 
@@ -68,7 +68,7 @@ const Home: NextPage = () => {
    return (
       <Layout navElements={navElements}>
          <Head>
-            <title>{"Evan Greenstein's Dev Portfolio"}</title>
+            <title>{"Evan Greenstein | Portfolio"}</title>
             <link rel="icon" href="/favicon.ico" />
          </Head>
 
