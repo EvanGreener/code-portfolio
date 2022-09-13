@@ -8,18 +8,18 @@ import {
    SiAndroidstudio,
 } from 'react-icons/si'
 
-const Experience = ({
-   experienceRef,
+const Skills = ({
+   skillsRef,
 }: {
-   experienceRef: RefObject<HTMLParagraphElement>
+   skillsRef: RefObject<HTMLParagraphElement>
 }) => {
    return (
       <>
          <p
-            ref={experienceRef}
+            ref={skillsRef}
             className="font-bold font-mono text-xl scroll-mt-16"
          >
-            Experience
+            Skills
          </p>
          <IconContext.Provider value={{ size: '4em', color: 'white' }}>
             <div className="flex flex-row flex-wrap justify-center gap-10 sm:w-1/3">
@@ -37,4 +37,4 @@ const Experience = ({
    )
 }
 
-export default Experience
+export default Skills

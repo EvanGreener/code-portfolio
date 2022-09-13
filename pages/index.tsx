@@ -6,7 +6,7 @@ import acnhUI from '../assets/acnh-ui.png'
 import noImage from '../assets/no-image.jpeg'
 import { RefObject, useRef } from 'react'
 import AboutMe from '../components/about'
-import Experience from '../components/experience'
+import Skills from '../components/experience'
 import { StaticImageData } from 'next/image'
 import Projects from '../components/projects'
 
@@ -26,7 +26,7 @@ export type Project = {
 
 const Home: NextPage = () => {
    const aboutRef = useRef<HTMLParagraphElement>(null)
-   const experienceRef = useRef<HTMLParagraphElement>(null)
+   const skillsRef = useRef<HTMLParagraphElement>(null)
    const projectsRef = useRef<HTMLParagraphElement>(null)
 
    const navElements: NavElement[] = [
@@ -38,10 +38,10 @@ const Home: NextPage = () => {
       },
       { text: 'About Me', href: '#about', isMain: false, domRef: aboutRef },
       {
-         text: 'Experience',
-         href: '#experiece',
+         text: 'Skills',
+         href: '#skills',
          isMain: false,
-         domRef: experienceRef,
+         domRef: skillsRef,
       },
       {
          text: 'Projects',
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
              * Experience Section
              *    - programming languages + frameworks
              */}
-            <Experience experienceRef={experienceRef} />
+            <Skills skillsRef={skillsRef} />
             {/**
              * Projects Section
              *    - Project title + picture + technologies used

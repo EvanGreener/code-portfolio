@@ -27,7 +27,7 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
                      <p className="underline text-lg text-center font-mono">
                         {title}
                      </p>
-                     <div className="w-1/2 sm:w-3/4 hover:blur-sm">
+                     <div className="sm:w-3/4 hover:blur-sm">
                         <Image src={image} alt="Project image" />
                      </div>
                      <code className="text-center">{tags}</code>
