@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { RefObject } from 'react'
 import { Project } from '../pages'
+import Section from './section'
 
 type ProjectProps = {
    projects: Project[]
@@ -10,7 +11,7 @@ type ProjectProps = {
 
 const Projects = ({ projects, projectsRef }: ProjectProps) => {
    return (
-      <div className="py-10 flex flex-col items-center gap-y-10">
+      <Section>
          <p
             ref={projectsRef}
             className="font-bold font-mono text-xl scroll-mt-16"
@@ -45,7 +46,7 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
                )
             })}
          </div>
-      </div>
+      </Section>
    )
 }
 

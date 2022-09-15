@@ -2,6 +2,7 @@ import { RefObject } from 'react'
 import { IconContext } from 'react-icons'
 import { FaReact, FaJava, FaLinux, FaGitSquare } from 'react-icons/fa'
 import { SiMysql, SiCsharp } from 'react-icons/si'
+import Section from './section'
 
 export type Skill = {
    skill: string
@@ -60,7 +61,7 @@ const Skills = ({
       },
    ]
    return (
-      <div className="flex flex-col items-center gap-y-10 py-5 bg-cyan-900">
+      <Section bgColor="bg-cyan-900">
          <p
             ref={skillsRef}
             className="font-bold font-mono text-xl scroll-mt-16"
@@ -83,7 +84,7 @@ const Skills = ({
                })}
             </div>
          </IconContext.Provider>
-      </div>
+      </Section>
    )
 }
 

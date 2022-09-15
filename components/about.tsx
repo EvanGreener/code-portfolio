@@ -1,6 +1,7 @@
 import profile from '../assets/profile.jpg'
 import Image from 'next/image'
 import { RefObject } from 'react'
+import Section from './section'
 
 const AboutMe = ({
    aboutRef,
@@ -8,7 +9,7 @@ const AboutMe = ({
    aboutRef: RefObject<HTMLParagraphElement>
 }) => {
    return (
-      <div className="flex flex-col items-center gap-y-10 py-5 ">
+      <Section>
          <p ref={aboutRef} className="font-bold text-xl font-mono scroll-mt-20">
             About me
          </p>
@@ -27,7 +28,7 @@ const AboutMe = ({
             Before studying at Concordia, I completed a computer science DEC
             {" (Diplome d'Etudes Collegiales) "} at Dawson College.
          </p>
-      </div>
+      </Section>
    )
 }
 
