@@ -10,7 +10,7 @@ type ProjectProps = {
 
 const Projects = ({ projects, projectsRef }: ProjectProps) => {
    return (
-      <>
+      <div className="py-10 flex flex-col items-center gap-y-10">
          <p
             ref={projectsRef}
             className="font-bold font-mono text-xl scroll-mt-16"
@@ -45,7 +45,7 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
                )
             })}
          </div>
-      </>
+      </div>
    )
 }
 

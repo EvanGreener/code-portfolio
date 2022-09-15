@@ -74,7 +74,7 @@ const Home: NextPage = () => {
 
          <div
             id="content"
-            className="px-10 py-5 gap-y-10 flex flex-col items-center text-white scroll-mt-16"
+            className="flex flex-col items-center text-white scroll-mt-16"
          >
             {/**
              * About me Section

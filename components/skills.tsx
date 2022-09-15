@@ -40,7 +40,7 @@ const Skills = ({
       {
          skill: `C#`,
          icon: <SiCsharp />,
-         blurb: `The experience I have with C# is mostly academic. I've made a few applications using the
+         blurb: `The experience I have with C# is mostly academic. I've made a made applications with C# and a few using
          Windows Presentation Foundation (WPF) framework. I've also dabbled in the Unity game engine
          which uses C# as a scripting language.`,
       },
@@ -60,7 +60,7 @@ const Skills = ({
       },
    ]
    return (
-      <>
+      <div className="flex flex-col items-center gap-y-10 py-5 bg-cyan-900">
          <p
             ref={skillsRef}
             className="font-bold font-mono text-xl scroll-mt-16"
@@ -83,7 +83,7 @@ const Skills = ({
                })}
             </div>
          </IconContext.Provider>
-      </>
+      </div>
    )
 }
 
