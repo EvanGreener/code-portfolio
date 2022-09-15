@@ -1,6 +1,6 @@
 import { RefObject } from 'react'
 import { IconContext } from 'react-icons'
-import { FaReact, FaJava, FaLinux, FaGitSquare } from 'react-icons/fa'
+import { FaReact, FaJava, FaLinux, FaGitSquare, } from 'react-icons/fa'
 import { SiMysql, SiCsharp } from 'react-icons/si'
 import Section from './section'
 

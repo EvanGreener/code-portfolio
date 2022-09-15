@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { RefObject } from 'react'
 import { Project } from '../pages'
+import { FaExternalLinkAlt } from 'react-icons/fa'
 import Section from './section'
 
 type ProjectProps = {
@@ -34,9 +35,12 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
                            <a
                               className="z-10 rounded-full bg-gray-800 text-white 
                            px-3 py-2 hover:bg-gray-700 absolute top-1/2 left-1/2 
-                           -translate-x-1/2 -translate-y-1/2"
+                           -translate-x-1/2 -translate-y-1/2 opacity-25 hover:opacity-100"
                            >
-                              Go to
+                              Go to{' '}
+                              <FaExternalLinkAlt
+                                 style={{ display: 'inline' }}
+                              />
                            </a>
                         </Link>
                         <Image src={image} alt="Project image" />
