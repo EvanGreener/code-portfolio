@@ -4,6 +4,8 @@ import Image from 'next/image'
 import Layout from '../components/layout'
 import acnhUI from '../assets/acnh-ui.png'
 import noImage from '../assets/no-image.jpeg'
+import rubixImg from '../assets/rubix_cube.png'
+import spotaiImg from '../assets/spotai.png'
 import { RefObject, useRef } from 'react'
 import AboutMe from '../components/about'
 import Skills from '../components/skills'
@@ -53,10 +55,22 @@ const Home: NextPage = () => {
 
    const projects: Project[] = [
       {
-         title: 'Animal Crossing Cheat Sheet (Personal)',
+         title: 'SpotAI',
+         image: spotaiImg,
+         tags: 'React Tailwind Vite Python Flask Mysql',
+         link: 'https://github.com/wboughattas/SpotAI/',
+      },
+      {
+         title: 'Animal Crossing Cheat Sheet',
          image: acnhUI,
-         tags: 'React Typescript Material-UI acnhapi',
+         tags: 'React Typescript Material-UI acnhapi Github-Pages',
          link: 'https://evangreener.github.io/ACNH-Creature-Guide/',
+      },
+      {
+         title: 'Rubix Cube',
+         image: rubixImg,
+         tags: 'Three.JS Vite ES6-Modules',
+         link: 'https://github.com/EvanGreener/rubix-cube',
       },
       {
          title: 'E-commerce bookstore (Academic)',
