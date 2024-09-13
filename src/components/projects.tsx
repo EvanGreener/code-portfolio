@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { RefObject } from 'react'
-import { Project } from '../pages'
+import { Project } from '../app/page'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import Section from './section'
 
@@ -21,7 +21,7 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
          </p>
          <div className="flex flex-row flex-nowrap sm:w-2/3 overflow-x-auto gap-y-2 gap-x-10">
             {projects.map((item) => {
-               const { title, image, tags, link } = item
+               const { title, imgSrc, tags, link } = item
                return (
                   <div
                      key={link}
@@ -31,19 +31,22 @@ const Projects = ({ projects, projectsRef }: ProjectProps) => {
                         {title}
                      </p>
                      <div className="sm:w-3/4 relative">
-                        <Link href={link} passHref>
-                           <a
-                              className="z-10 rounded-full bg-gray-800 text-white 
+                        <Link
+                           href={link}
+                           passHref
+                           className="z-10 rounded-full bg-gray-800 text-white 
                            px-3 py-2 hover:bg-gray-700 absolute top-1/2 left-1/2 
                            -translate-x-1/2 -translate-y-1/2 opacity-25 hover:opacity-100"
-                           >
-                              Go to{' '}
-                              <FaExternalLinkAlt
-                                 style={{ display: 'inline' }}
-                              />
-                           </a>
+                        >
+                           Go to{' '}
+                           <FaExternalLinkAlt style={{ display: 'inline' }} />
                         </Link>
-                        <Image src={image} alt="Project image" />
+                        <Image
+                           src={imgSrc}
+                           alt="Project image"
+                           width={500}
+                           height={500}
+                        />
                      </div>
                      <code className="text-center">{tags}</code>
                   </div>

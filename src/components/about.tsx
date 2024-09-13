@@ -1,4 +1,3 @@
-import profile from '../assets/profile.jpg'
 import Image from 'next/image'
 import { RefObject } from 'react'
 import Section from './section'
@@ -13,12 +12,13 @@ const AboutMe = ({
          <p ref={aboutRef} className="font-bold text-xl font-mono scroll-mt-20">
             About me
          </p>
-         <div className="w-3/5 sm:w-1/4 overflow-hidden rounded-full ">
+         <div className="w-3/5 sm:w-1/4 flex justify-center">
             <Image
-               src={profile}
+               src="/profile.jpg"
                alt="profile pic"
-               layout="responsive"
-               objectFit="cover"
+               width={250}
+               height={250}
+               className="overflow-hidden rounded-full"
             />
          </div>
          <p className="sm:w-2/5 text-lg font-mono">

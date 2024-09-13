@@ -1,16 +1,10 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Layout from '../components/layout'
-import acnhUI from '../assets/acnh-ui.png'
-import noImage from '../assets/no-image.jpeg'
-import rubixImg from '../assets/rubix_cube.png'
-import spotaiImg from '../assets/spotai.png'
+'use client'
 import { RefObject, useRef } from 'react'
 import AboutMe from '../components/about'
-import Skills from '../components/skills'
-import { StaticImageData } from 'next/image'
+import Footer from '../components/footer'
+import Navbar from '../components/navbar'
 import Projects from '../components/projects'
+import Skills from '../components/skills'
 
 export type NavElement = {
    text: string
@@ -21,12 +15,12 @@ export type NavElement = {
 
 export type Project = {
    title: string
-   image: StaticImageData
+   imgSrc: string
    tags: string
    link: string
 }
 
-const Home: NextPage = () => {
+export default function MainScreen() {
    const aboutRef = useRef<HTMLParagraphElement>(null)
    const skillsRef = useRef<HTMLParagraphElement>(null)
    const projectsRef = useRef<HTMLParagraphElement>(null)
@@ -52,39 +46,37 @@ const Home: NextPage = () => {
          domRef: projectsRef,
       },
    ]
-
    const projects: Project[] = [
       {
          title: 'SpotAI',
-         image: spotaiImg,
+         imgSrc: '/spotai.png',
          tags: 'React Tailwind Vite Python Flask Mysql',
          link: 'https://github.com/wboughattas/SpotAI/',
       },
       {
          title: 'Animal Crossing Cheat Sheet',
-         image: acnhUI,
+         imgSrc: '/acnh-ui.png',
          tags: 'React Typescript Material-UI acnhapi Github-Pages',
          link: 'https://evangreener.github.io/ACNH-Creature-Guide/',
       },
       {
          title: 'Rubix Cube',
-         image: rubixImg,
+         imgSrc: '/rubix_cube.png',
          tags: 'Three.JS Vite ES6-Modules',
          link: 'https://github.com/EvanGreener/rubix-cube',
       },
       {
          title: 'E-commerce bookstore (Academic)',
-         image: noImage,
+         imgSrc: '/no-image.jpeg',
          tags: 'JSF Java xhtml JPA Arquillian Log4J MySQL',
          link: 'https://github.com/EvanGreener/JSF-e-commerce-site',
       },
    ]
    return (
-      <Layout navElements={navElements}>
-         <Head>
-            <title>{'Evan Greenstein | Portfolio'}</title>
-            <link rel="icon" href="/favicon.ico" />
-         </Head>
+      <div className="bg-slate-900">
+         <div className="sticky top-0 z-10 ">
+            <Navbar navElements={navElements} />
+         </div>
 
          <div
             id="content"
@@ -106,8 +98,7 @@ const Home: NextPage = () => {
              */}
             <Projects projects={projects} projectsRef={projectsRef} />
          </div>
-      </Layout>
+         <Footer />
+      </div>
    )
 }
-
-export default Home

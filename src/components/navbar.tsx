@@ -1,7 +1,13 @@
 import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { NavElement } from '../pages'
+import { RefObject } from 'react'
+export type NavElement = {
+   text: string
+   href: string
+   isMain: boolean
+   domRef: RefObject<HTMLParagraphElement>
+}
 
 type NavbarProps = {
    navElements: NavElement[]
@@ -30,17 +36,16 @@ const Navbar = ({ navElements }: NavbarProps) => {
 
                   return (
                      <span key={href}>
-                        <Link href={href}>
-                           <a
-                              onClick={() =>
-                                 domRef.current?.scrollIntoView({
-                                    behavior: 'smooth',
-                                 })
-                              }
-                              className={classes}
-                           >
-                              {text}
-                           </a>
+                        <Link
+                           href={href}
+                           onClick={() =>
+                              domRef.current?.scrollIntoView({
+                                 behavior: 'smooth',
+                              })
+                           }
+                           className={classes}
+                        >
+                           {text}
                         </Link>
                      </span>
                   )
@@ -56,17 +61,16 @@ const Navbar = ({ navElements }: NavbarProps) => {
 
                         return (
                            <div key={href}>
-                              <Link href={href}>
-                                 <a
-                                    onClick={() =>
-                                       domRef.current?.scrollIntoView({
-                                          behavior: 'smooth',
-                                       })
-                                    }
-                                    className={classes}
-                                 >
-                                    {text}
-                                 </a>
+                              <Link
+                                 href={href}
+                                 onClick={() =>
+                                    domRef.current?.scrollIntoView({
+                                       behavior: 'smooth',
+                                    })
+                                 }
+                                 className={classes}
+                              >
+                                 {text}
                               </Link>
                            </div>
                         )

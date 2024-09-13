@@ -13,22 +13,16 @@ const Footer = () => {
          <div className="flex flex-row justify-center gap-4">
             <IconContext.Provider value={{ color: 'white', size: '3em' }}>
                <Link href="https://github.com/EvanGreener" passHref>
-                  <a>
-                     <FaGithub />
-                  </a>
+                  <FaGithub />
                </Link>
                <Link
                   href="https://www.linkedin.com/in/evan-greenstein/"
                   passHref
                >
-                  <a>
-                     <FaLinkedin />
-                  </a>
+                  <FaLinkedin />
                </Link>
                <Link href="https://www.facebook.com/evan.greenstein2/" passHref>
-                  <a>
-                     <FaFacebook />
-                  </a>
+                  <FaFacebook />
                </Link>
             </IconContext.Provider>
          </div>
