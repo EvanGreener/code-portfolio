@@ -1,5 +1,6 @@
 'use client'
-import { RefObject, useRef } from 'react'
+import { RefObject, useEffect, useRef } from 'react'
+import Typed from 'typed.js'
 import AboutMe from '../components/about'
 import Footer from '../components/footer'
 import Navbar from '../components/navbar'
@@ -16,89 +17,42 @@ export type NavElement = {
 export type Project = {
    title: string
    imgSrc: string
-   tags: string
+   tags: string[]
    link: string
 }
 
 export default function MainScreen() {
-   const aboutRef = useRef<HTMLParagraphElement>(null)
-   const skillsRef = useRef<HTMLParagraphElement>(null)
-   const projectsRef = useRef<HTMLParagraphElement>(null)
+   const introTextEl = useRef(null)
+   const subTextEl = useRef(null)
 
-   const navElements: NavElement[] = [
-      {
-         text: 'Evan Greesntein',
-         href: '#about',
-         isMain: true,
-         domRef: aboutRef,
-      },
-      { text: 'About Me', href: '#about', isMain: false, domRef: aboutRef },
-      {
-         text: 'Skills',
-         href: '#skills',
-         isMain: false,
-         domRef: skillsRef,
-      },
-      {
-         text: 'Projects',
-         href: '#projects',
-         isMain: false,
-         domRef: projectsRef,
-      },
-   ]
-   const projects: Project[] = [
-      {
-         title: 'SpotAI',
-         imgSrc: '/spotai.png',
-         tags: 'React Tailwind Vite Python Flask Mysql',
-         link: 'https://github.com/wboughattas/SpotAI/',
-      },
-      {
-         title: 'Animal Crossing Cheat Sheet',
-         imgSrc: '/acnh-ui.png',
-         tags: 'React Typescript Material-UI acnhapi Github-Pages',
-         link: 'https://evangreener.github.io/ACNH-Creature-Guide/',
-      },
-      {
-         title: 'Rubix Cube',
-         imgSrc: '/rubix_cube.png',
-         tags: 'Three.JS Vite ES6-Modules',
-         link: 'https://github.com/EvanGreener/rubix-cube',
-      },
-      {
-         title: 'E-commerce bookstore (Academic)',
-         imgSrc: '/no-image.jpeg',
-         tags: 'JSF Java xhtml JPA Arquillian Log4J MySQL',
-         link: 'https://github.com/EvanGreener/JSF-e-commerce-site',
-      },
-   ]
+   const aboutRef = useRef(null)
+   const skillsRef = useRef(null)
+   const projectsRef = useRef(null)
+
+   useEffect(() => {
+      const typed = new Typed(introTextEl.current, {
+         strings: [
+            '<span style="color: white; white-space: pre-line; font-size: 1.25rem">' +
+               '<span style="font-size: 1.5rem">&gt;_ </span> <span style=" color: green ;"> whoami </span>^1000\n' +
+               'Evan Greenstein\n^500' +
+               'Aspiring Software Engineer' +
+               '</span>',
+         ],
+         typeSpeed: 50,
+      })
+
+      return () => {
+         typed.destroy()
+      }
+   }, [])
+
    return (
-      <div className="bg-slate-900">
-         <div className="sticky top-0 z-10 ">
-            <Navbar navElements={navElements} />
+      <div className="bg-indigo-950 h-full w-full">
+         <div className="z-10 h-full w-full flex items-center justify-center space-x-2">
+            <div className="bg-black/50 w-2/5 h-2/5 rounded-xl p-4">
+               <span ref={introTextEl} className="" />
+            </div>
          </div>
-
-         <div
-            id="content"
-            className="flex flex-col items-center text-white scroll-mt-16"
-         >
-            {/**
-             * About me Section
-             *    - picture + description
-             */}
-            <AboutMe aboutRef={aboutRef} />
-            {/**
-             * Skills Section
-             *    - programming languages + frameworks
-             */}
-            <Skills skillsRef={skillsRef} />
-            {/**
-             * Projects Section
-             *    - Project title + picture + technologies used
-             */}
-            <Projects projects={projects} projectsRef={projectsRef} />
-         </div>
-         <Footer />
       </div>
    )
 }
