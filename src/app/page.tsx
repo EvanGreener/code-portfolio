@@ -13,11 +13,6 @@ import {
 import { loadSlim } from '@tsparticles/slim' // if you are going to use `loadSlim`, install the "@tsparticles/slim" package too.
 // import { loadBasic } from "@tsparticles/basic"; // if you are going to use `loadBasic`, install the "@tsparticles/basic" package too.
 
-import AboutMe from '../components/about'
-import Footer from '../components/footer'
-import Navbar from '../components/navbar'
-import Projects from '../components/projects'
-import Skills from '../components/skills'
 import { motion, Variants } from 'framer-motion'
 import { once } from 'events'
 import Image from 'next/image'
