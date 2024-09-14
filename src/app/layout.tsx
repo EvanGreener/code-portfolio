@@ -6,7 +6,7 @@ export const metadata: Metadata = {
    title: 'Evan Greenstein | Portfolio',
 }
 
-export const jbMono = JetBrains_Mono({
+const jbMono = JetBrains_Mono({
    subsets: ['latin'],
    display: 'swap',
 })
