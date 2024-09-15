@@ -12,3 +12,16 @@ html,body {
     font-size: 1.25rem; 
     color: white;
 }
+
+.carousel-item {
+    object-fit: cover;
+}
+
+.carousel-container {
+    height: 100%;
+
+}
+
+.carousel-track {
+    height: 100%;
+}

@@ -14,10 +14,25 @@ import { loadSlim } from '@tsparticles/slim' // if you are going to use `loadSli
 // import { loadBasic } from "@tsparticles/basic"; // if you are going to use `loadBasic`, install the "@tsparticles/basic" package too.
 
 import { motion, Variants } from 'framer-motion'
-import { once } from 'events'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 import { IoArrowDownOutline } from 'react-icons/io5'
+import Carousel from 'react-multi-carousel'
+import 'react-multi-carousel/lib/styles.css'
+
+import addBird from '../../public/bb/add-bird.png'
+import birdpediaEntry from '../../public/bb/birdpedia-entry.png'
+import birdpedia from '../../public/bb/birdpedia.png'
+import home from '../../public/bb/home.png'
+import leaderboard from '../../public/bb/leaderboard.png'
+
+import account from '../../public/tw/account.png'
+import loginEmail from '../../public/tw/login-email.png'
+import login from '../../public/tw/login.png'
+import tripCalendar from '../../public/tw/trip-calendar.png'
+import tripPlanner from '../../public/tw/trip-planner.png'
+
+import noImage from '../../public/no-image.jpeg'
 
 export type NavElement = {
    text: string
@@ -36,6 +51,7 @@ export type Project = {
 export default function MainScreen() {
    const introTextEl = useRef(null)
 
+   const [readMore, setReadMore] = useState(false)
    const aboutRef = useRef(null)
    const skillsRef = useRef(null)
    const projectsRef = useRef(null)
@@ -47,8 +63,8 @@ export default function MainScreen() {
          strings: [
             '<span style="white-space: pre-line; font-size: 1.25rem">' +
                '<span style="font-size: 1.5rem">&gt;_ </span> <span style=" color: green ;"> whoami </span>^1000\n' +
-               '`Evan Greenstein` \n^250 ' +
-               '`Aspiring Software Engineer` \n^250 ' +
+               '`✅ Evan Greenstein` \n^250 ' +
+               '`✅ Aspiring Software Engineer` \n^250 ' +
                '<span style="font-size: 1.5rem">&gt;_ </span>' +
                '</span>',
          ],
@@ -162,8 +178,32 @@ export default function MainScreen() {
          },
       },
    }
+   const aboutMeParagraphs = [
+      `As a passionate student pursuing Software 
+      Engineering at Concordia University, coupled with my prior 
+      studies in Computer Science at Dawson College, I am deeply 
+      immersed in the world of technology.`,
 
-   const technologies: { imgSrc: string; ref: string }[] = [
+      `With a keen eye for detail and a love for problem-solving, I have found my niche 
+      in full-stack web development. From crafting intuitive user interfaces 
+      to architecting robust backend systems, I enjoy the balance of 
+      creativity and functionality. `,
+
+      `Currently honing my skills at 
+      Concordia University, I eagerly anticipate the opportunity 
+      to apply my knowledge and passion to real-world projects. 
+      I am driven by a desire to continuously learn and grow, 
+      exploring emerging technologies and embracing new challenges
+      with enthusiasm.`,
+
+      `I am always open to connecting with like-minded 
+      individuals, discussing innovative ideas, and collaborating 
+      on projects that push the boundaries of what technology 
+      can achieve. Let's connect and explore the endless 
+      possibilities together`,
+   ]
+
+   const mySkills: { imgSrc: string; ref: string }[] = [
       {
          imgSrc: 'https://www.svgrepo.com/show/355190/reactjs.svg',
          ref: 'https://react.dev/',
@@ -246,9 +286,66 @@ export default function MainScreen() {
       },
       {
          imgSrc: 'https://www.svgrepo.com/show/448266/aws.svg',
-         ref: 'https://www.svgrepo.com/show/448266/aws.svg',
+         ref: 'https://aws.amazon.com/',
+      },
+      {
+         imgSrc:
+            'https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png',
+         ref: 'https://rxjs.dev/',
       },
    ]
+
+   const projects: {
+      title: string
+      desc: string
+      github: string
+      tags: string[]
+      imgSrcs?: StaticImageData[]
+      ref?: string
+   }[] = [
+      {
+         title: 'Backyard buddiez (solo project)',
+         desc: `A bird tracking app/game for everyone! Made with Next.js and Supabase. Use an app like Merlin to 
+         identify a bird you've spotted, then enter the name of the bird you've IDd and the app will automatically a
+         dd your sighting. The app will let you know if your Birdpedia gained a new entry! 
+         Look back on all the previous birds you've IDd. Click on one get information and various statistics on it!
+         By identifying birds and completing the daily challenges, you earn points. You get 500 points for each new 
+         bird you ID and 100 points for every daily challenge you complete. See how you stack up against your friends and the world!
+         When you ID a bird, if your sighting fit one or more of the daily challenges you can check off those challenges 
+         before adding your sighting! Your daily challenge progress will updated and shown on the home screen!`,
+         github: 'https://github.com/EvanGreener/backyard-buddiez',
+         tags: ['Next.js', 'Supabase', 'PostgreSQL', 'drizzle-orm', 'React'],
+         imgSrcs: [home, leaderboard, addBird, birdpedia, birdpediaEntry],
+         ref: 'https://backyard-buddiez.vercel.app/',
+      },
+      {
+         title: 'TripWise',
+         desc: `A web and mobile application that recommends activities and 
+         restaurants based on your interests. Once the app generates the recommended
+         restaurants/activites, the app displays a calendar which shows when to go to
+         each activity. The user can also click on any entry in the calendar to open
+         Google Maps to see the location. Before the app generates recommendations,
+         the app accesses your Google calandar (if you signed in with Google) to
+         ensure that the generated activities don't conflict with other 
+         appointments/events`,
+         github: 'https://github.com/mattmazzone/engr-490',
+         tags: ['React Native', 'Expo', 'Firebase', 'Python', 'Google APIs'],
+         imgSrcs: [login, loginEmail, tripPlanner, tripCalendar, account],
+      },
+   ]
+
+   const responsive = {
+      superLargeDesktop: {
+         breakpoint: { max: 3000, min: 4000 },
+         items: 2,
+         slidesToSlide: 2, // optional, default to 1.
+      },
+      mobile: {
+         breakpoint: { max: 3000, min: 0 },
+         items: 1,
+         slidesToSlide: 1, // optional, default to 1.
+      },
+   }
 
    return (
       <div className="bg-indigo-950 h-full w-full">
@@ -264,7 +361,7 @@ export default function MainScreen() {
             =======================
          */}
          <div className="z-10 h-full w-full flex flex-col items-center justify-center space-y-10">
-            <div className="w-2/5 h-2/5">
+            <div className="w-3/5 h-3/5">
                <div className="bg-slate-300 rounded-t-xl p-2"></div>
                <div className="bg-black/50 h-full rounded-b-xl p-4">
                   <span ref={introTextEl} />
@@ -306,7 +403,7 @@ export default function MainScreen() {
             About me section
             =======================
          */}
-         <div className="bg-indigo-700 w-full p-10">
+         <div className="bg-indigo-950 w-full p-10">
             <motion.div
                initial="offScreenLeft"
                whileInView="onScreen"
@@ -322,40 +419,40 @@ export default function MainScreen() {
                   alt="profile pic"
                   className="rounded-full"
                />
-               <p className="w-2/5 indent-8 text-justify">
-                  {`As a passionate student pursuing Software 
-               Engineering at Concordia University, coupled with my prior 
-               studies in Computer Science at Dawson College, I am deeply 
-               immersed in the world of technology.`}
-               </p>
-               <p className="w-2/5 indent-8 text-justify">
-                  {`With a keen eye for detail and a love for problem-solving, I have found my niche 
-               in full-stack web development. From crafting intuitive user interfaces 
-               to architecting robust backend systems, I enjoy the balance of 
-               creativity and functionality. `}
-               </p>
-               <p className="w-2/5 indent-8 text-justify">
-                  {`Currently honing my skills at 
-               Concordia University, I eagerly anticipate the opportunity 
-               to apply my knowledge and passion to real-world projects. 
-               I am driven by a desire to continuously learn and grow, 
-               exploring emerging technologies and embracing new challenges
-               with enthusiasm.`}
-               </p>
-               <p className="w-2/5 indent-8 text-justify">
-                  {`I am always open to connecting with like-minded 
-               individuals, discussing innovative ideas, and collaborating 
-               on projects that push the boundaries of what technology 
-               can achieve. Let's connect and explore the endless 
-               possibilities together`}
-               </p>
+               {readMore ? (
+                  aboutMeParagraphs.map((para) => {
+                     return (
+                        <p
+                           key={para.slice(16)}
+                           className="w-2/5 indent-8 text-justify"
+                        >
+                           {para}
+                        </p>
+                     )
+                  })
+               ) : (
+                  <>
+                     <p
+                        key={aboutMeParagraphs[0].slice(16)}
+                        className="w-2/5 indent-8 text-justify"
+                     >
+                        {aboutMeParagraphs[0]}
+                     </p>
+                     <p
+                        className="hover:underline"
+                        onClick={() => setReadMore(true)}
+                     >
+                        Read More ...
+                     </p>
+                  </>
+               )}
             </motion.div>
          </div>
          {/* 
-            Technologies section
+            Skills section
             =======================
          */}
-         <div className="bg-indigo-950 h-full w-full p-10">
+         <div className="bg-indigo-950 w-full p-10">
             <motion.div
                initial="offScreenRight"
                whileInView="onScreen"
@@ -363,9 +460,9 @@ export default function MainScreen() {
                className="flex flex-col items-center space-y-10"
                variants={sectionAOS}
             >
-               <p className="text-4xl">Technologies</p>
+               <p className="text-4xl">Skills</p>
                <div className="w-3/5 flex flex-wrap gap-4 items-center">
-                  {technologies.map((tech) => {
+                  {mySkills.map((tech) => {
                      const { imgSrc, ref } = tech
                      return (
                         <div
@@ -385,6 +482,102 @@ export default function MainScreen() {
                   })}
                </div>
             </motion.div>
+         </div>
+         {/* 
+            Projects section
+            =======================
+         */}
+         <div className="bg-indigo-950 w-full p-10 flex flex-col items-center space-y-8">
+            <p className="text-4xl">Projects</p>
+            {projects.map((proj) => {
+               const { title, desc, github, tags, imgSrcs, ref } = proj
+
+               return (
+                  <motion.div
+                     key={title}
+                     initial="offScreenLeft"
+                     whileInView="onScreen"
+                     viewport={{ once: true, amount: 0.8 }}
+                     className="bg-white/75 p-4 rounded-xl w-3/5 h-[36rem]"
+                     variants={sectionAOS}
+                  >
+                     <div className="flex text-black h-full">
+                        <div className="flex flex-col w-1/2 space-y-4">
+                           <p className="text-lg font-bold">{title}</p>
+                           <p className="text-justify indent-8 overflow-auto">
+                              {desc}
+                           </p>
+                           <p>
+                              <span className="flex flex-wrap gap-2">
+                                 <span className="p-2">Tags:</span>
+                                 {tags.map((tag) => {
+                                    return (
+                                       <span
+                                          key={tag}
+                                          className="bg-slate-200/75 rounded-xl p-2"
+                                       >
+                                          {tag}
+                                       </span>
+                                    )
+                                 })}
+                              </span>
+                           </p>
+                           <div className="flex gap-8 items-center">
+                              <Link
+                                 href={github}
+                                 className="bg-slate-200/75 border-2 border-black rounded-xl flex p-2 gap-2 items-center"
+                                 target="_blank"
+                              >
+                                 <Image
+                                    src={
+                                       'https://www.svgrepo.com/show/512317/github-142.svg'
+                                    }
+                                    alt="Github repo"
+                                    width={25}
+                                    height={25}
+                                 />
+                                 <span>GitHub Repo</span>
+                              </Link>
+                              {ref && (
+                                 <Link
+                                    href={ref}
+                                    className="bg-slate-200/75 border-2 border-black rounded-xl flex p-2 gap-2 items-center"
+                                    target="_blank"
+                                 >
+                                    <span>Live</span>
+                                 </Link>
+                              )}
+                           </div>
+                        </div>
+                        <div className="w-1/2 p-2 rouneded-xl h-full relative">
+                           <Carousel
+                              showDots={true}
+                              responsive={responsive}
+                              containerClass="carousel-container"
+                              sliderClass="carousel-track"
+                           >
+                              {imgSrcs !== undefined ? (
+                                 imgSrcs.map((src) => {
+                                    return (
+                                       <Image
+                                          key={src.src}
+                                          src={src}
+                                          alt="project img"
+                                          sizes="33vw"
+                                          fill
+                                          style={{ objectFit: 'cover' }}
+                                       />
+                                    )
+                                 })
+                              ) : (
+                                 <Image src={noImage} alt="project img" />
+                              )}
+                           </Carousel>
+                        </div>
+                     </div>
+                  </motion.div>
+               )
+            })}
          </div>
       </div>
    )
