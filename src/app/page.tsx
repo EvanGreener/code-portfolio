@@ -33,6 +33,7 @@ import tripCalendar from '../../public/tw/trip-calendar.png'
 import tripPlanner from '../../public/tw/trip-planner.png'
 
 import noImage from '../../public/no-image.jpeg'
+import { RxHamburgerMenu } from 'react-icons/rx'
 
 export type NavElement = {
    text: string
@@ -51,12 +52,13 @@ export type Project = {
 export default function MainScreen() {
    const introTextEl = useRef(null)
 
-   const [readMore, setReadMore] = useState(false)
    const aboutRef = useRef(null)
    const skillsRef = useRef(null)
    const projectsRef = useRef(null)
 
    const [init, setInit] = useState(false)
+   const [readMore, setReadMore] = useState(false)
+   const [x, setX] = useState(0)
 
    useEffect(() => {
       const typed = new Typed(introTextEl.current, {
@@ -98,7 +100,7 @@ export default function MainScreen() {
          interactivity: {
             events: {
                onClick: {
-                  enable: true,
+                  enable: false,
                   mode: 'push',
                },
                onHover: {
@@ -141,7 +143,7 @@ export default function MainScreen() {
                density: {
                   enable: true,
                },
-               value: 120,
+               value: 200,
             },
             opacity: {
                value: 0.5,
@@ -314,7 +316,14 @@ export default function MainScreen() {
          When you ID a bird, if your sighting fit one or more of the daily challenges you can check off those challenges 
          before adding your sighting! Your daily challenge progress will updated and shown on the home screen!`,
          github: 'https://github.com/EvanGreener/backyard-buddiez',
-         tags: ['Next.js', 'Supabase', 'PostgreSQL', 'drizzle-orm', 'React'],
+         tags: [
+            'Next.js',
+            'Supabase',
+            'PostgreSQL',
+            'drizzle-orm',
+            'React',
+            'SPARQL',
+         ],
          imgSrcs: [home, leaderboard, addBird, birdpedia, birdpediaEntry],
          ref: 'https://backyard-buddiez.vercel.app/',
       },
@@ -338,14 +347,19 @@ export default function MainScreen() {
       superLargeDesktop: {
          breakpoint: { max: 3000, min: 4000 },
          items: 2,
-         slidesToSlide: 2, // optional, default to 1.
       },
-      mobile: {
+      mobileDesktop: {
          breakpoint: { max: 3000, min: 0 },
          items: 1,
-         slidesToSlide: 1, // optional, default to 1.
       },
    }
+
+   const navBarLinks: { href: string; section: string }[] = [
+      { href: '#intro', section: 'Intro' },
+      { href: '#aboutme', section: 'About' },
+      { href: '#skills', section: 'Skills' },
+      { href: '#projects', section: 'Projects' },
+   ]
 
    return (
       <div className="bg-indigo-950 h-full w-full">
@@ -357,11 +371,34 @@ export default function MainScreen() {
             />
          )}
          {/* 
+            Navbar 
+            =======================
+         */}
+         <div className="z-10 fixed top-8 text-black w-full flex justify-center">
+            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-2 w-[450px]">
+               {navBarLinks.map((link) => {
+                  const { href, section } = link
+                  return (
+                     <Link
+                        key={href}
+                        href={`/${href}`}
+                        className="rounded-full p-2 transition-colors hover:bg-slate-200"
+                     >
+                        {section}
+                     </Link>
+                  )
+               })}
+            </div>
+         </div>
+         {/* 
             Intro section 
             =======================
          */}
-         <div className="z-10 h-full w-full flex flex-col items-center justify-center space-y-10">
-            <div className="w-3/5 h-3/5">
+         <div
+            id="intro"
+            className="h-full w-full flex flex-col items-center justify-end space-y-10 pb-10"
+         >
+            <div className="w-3/5 h-2/5">
                <div className="bg-slate-300 rounded-t-xl p-2"></div>
                <div className="bg-black/50 h-full rounded-b-xl p-4">
                   <span ref={introTextEl} />
@@ -399,11 +436,12 @@ export default function MainScreen() {
                />
             </div>
          </div>
+
          {/* 
             About me section
             =======================
          */}
-         <div className="bg-indigo-950 w-full p-10">
+         <div id="aboutme" className="bg-indigo-950 w-full p-10">
             <motion.div
                initial="offScreenLeft"
                whileInView="onScreen"
@@ -452,7 +490,7 @@ export default function MainScreen() {
             Skills section
             =======================
          */}
-         <div className="bg-indigo-950 w-full p-10">
+         <div id="skills" className="bg-indigo-950 w-full p-10">
             <motion.div
                initial="offScreenRight"
                whileInView="onScreen"
@@ -487,7 +525,10 @@ export default function MainScreen() {
             Projects section
             =======================
          */}
-         <div className="bg-indigo-950 w-full p-10 flex flex-col items-center space-y-8">
+         <div
+            id="projects"
+            className="bg-indigo-950 w-full p-10 flex flex-col items-center space-y-8"
+         >
             <p className="text-4xl">Projects</p>
             {projects.map((proj) => {
                const { title, desc, github, tags, imgSrcs, ref } = proj
@@ -497,11 +538,11 @@ export default function MainScreen() {
                      key={title}
                      initial="offScreenLeft"
                      whileInView="onScreen"
-                     viewport={{ once: true, amount: 0.8 }}
+                     viewport={{ once: true, amount: 0.4 }}
                      className="bg-white/75 p-4 rounded-xl w-3/5 h-[36rem]"
                      variants={sectionAOS}
                   >
-                     <div className="flex text-black h-full">
+                     <div className="flex text-black h-full space-x-4">
                         <div className="flex flex-col w-1/2 space-y-4">
                            <p className="text-lg font-bold">{title}</p>
                            <p className="text-justify indent-8 overflow-auto">
@@ -565,7 +606,7 @@ export default function MainScreen() {
                                           alt="project img"
                                           sizes="33vw"
                                           fill
-                                          style={{ objectFit: 'cover' }}
+                                          style={{ objectFit: 'contain' }}
                                        />
                                     )
                                  })
