@@ -374,8 +374,11 @@ export default function MainScreen() {
             Navbar 
             =======================
          */}
-         <div className="z-10 fixed top-8 text-black w-full flex justify-center">
-            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-21 w-[350px] xl:w-1/4">
+         <div
+            className="z-10 absolute top-8 left-0 right-0 text-black w-full flex justify-center"
+            style={{ paddingLeft: 'inherit', paddingRight: 'inherit' }}
+         >
+            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-21 w-[325px] xl:w-1/4">
                {navBarLinks.map((link) => {
                   const { href, section } = link
                   return (
