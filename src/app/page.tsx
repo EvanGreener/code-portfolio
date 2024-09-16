@@ -58,7 +58,7 @@ export default function MainScreen() {
 
    const [init, setInit] = useState(false)
    const [readMore, setReadMore] = useState(false)
-   const [x, setX] = useState(0)
+   const [navIndicatorX, setNavIndicatorX] = useState(0)
 
    useEffect(() => {
       const typed = new Typed(introTextEl.current, {
@@ -362,7 +362,7 @@ export default function MainScreen() {
    ]
 
    return (
-      <div className="bg-indigo-950 h-full w-full">
+      <div className="bg-indigo-950 w-full">
          {init && (
             <Particles
                id="tsparticles"
@@ -375,14 +375,14 @@ export default function MainScreen() {
             =======================
          */}
          <div className="z-10 fixed top-8 text-black w-full flex justify-center">
-            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-2 w-[450px]">
+            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-2 w-1/4">
                {navBarLinks.map((link) => {
                   const { href, section } = link
                   return (
                      <Link
                         key={href}
                         href={`/${href}`}
-                        className="rounded-full p-2 transition-colors hover:bg-slate-200"
+                        className="rounded-full p-2 transition ease-in-out duration-300 hover:bg-slate-200 active:bg-slate-400"
                      >
                         {section}
                      </Link>
@@ -396,9 +396,9 @@ export default function MainScreen() {
          */}
          <div
             id="intro"
-            className="h-full w-full flex flex-col items-center justify-end space-y-10 pb-10"
+            className="h-screen w-full flex flex-col items-center justify-end space-y-10 pb-10"
          >
-            <div className="w-3/5 h-2/5">
+            <div className="w-3/5 h-1/2">
                <div className="bg-slate-300 rounded-t-xl p-2"></div>
                <div className="bg-black/50 h-full rounded-b-xl p-4">
                   <span ref={introTextEl} />
@@ -441,7 +441,7 @@ export default function MainScreen() {
             About me section
             =======================
          */}
-         <div id="aboutme" className="bg-indigo-950 w-full p-10">
+         <div id="aboutme" className="w-full p-10">
             <motion.div
                initial="offScreenLeft"
                whileInView="onScreen"
@@ -490,7 +490,7 @@ export default function MainScreen() {
             Skills section
             =======================
          */}
-         <div id="skills" className="bg-indigo-950 w-full p-10">
+         <div id="skills" className="w-full p-10">
             <motion.div
                initial="offScreenRight"
                whileInView="onScreen"
@@ -527,7 +527,7 @@ export default function MainScreen() {
          */}
          <div
             id="projects"
-            className="bg-indigo-950 w-full p-10 flex flex-col items-center space-y-8"
+            className=" w-full p-10 flex flex-col items-center space-y-8"
          >
             <p className="text-4xl">Projects</p>
             {projects.map((proj) => {
