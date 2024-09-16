@@ -34,6 +34,8 @@ import tripPlanner from '../../public/tw/trip-planner.png'
 
 import noImage from '../../public/no-image.jpeg'
 import { RxHamburgerMenu } from 'react-icons/rx'
+import { TfiDownload } from 'react-icons/tfi'
+import { MdEmail } from 'react-icons/md'
 
 export type NavElement = {
    text: string
@@ -408,22 +410,28 @@ export default function MainScreen() {
                </div>
             </div>
 
-            <div className="flex space-x-10">
+            <div className="flex space-x-10 items-center">
                <Link href={'https://github.com/EvanGreener'}>
                   <Image
                      src={'https://www.svgrepo.com/show/512317/github-142.svg'}
-                     height={100}
-                     width={100}
+                     height={50}
+                     width={50}
                      alt="GitHub"
                   />
                </Link>
                <Link href={'https://www.linkedin.com/in/evan-greenstein/'}>
                   <Image
                      src={'https://www.svgrepo.com/show/448234/linkedin.svg'}
-                     height={100}
-                     width={100}
+                     height={50}
+                     width={50}
                      alt="LinkedIn"
                   />
+               </Link>
+               <Link href={'/Evan_Greenstein_CV.pdf'} target="_blank">
+                  <TfiDownload size={40} />
+               </Link>
+               <Link href={'mailto:evanlg16@gmail.com'}>
+                  <MdEmail size={50} />
                </Link>
             </div>
             <div className="relative flex">
