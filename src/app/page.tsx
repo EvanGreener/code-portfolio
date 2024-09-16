@@ -362,7 +362,7 @@ export default function MainScreen() {
    ]
 
    return (
-      <div className="bg-indigo-950 w-full">
+      <div className="bg-indigo-950 w-full p-4 overscroll-contain overflow-hidden">
          {init && (
             <Particles
                id="tsparticles"
@@ -375,7 +375,7 @@ export default function MainScreen() {
             =======================
          */}
          <div className="z-10 fixed top-8 text-black w-full flex justify-center">
-            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-2 w-1/4">
+            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-21 w-[350px] xl:w-1/4">
                {navBarLinks.map((link) => {
                   const { href, section } = link
                   return (
@@ -398,7 +398,7 @@ export default function MainScreen() {
             id="intro"
             className="h-screen w-full flex flex-col items-center justify-end space-y-10 pb-10"
          >
-            <div className="w-3/5 h-1/2">
+            <div className="w-full xl:w-3/5 h-1/2">
                <div className="bg-slate-300 rounded-t-xl p-2"></div>
                <div className="bg-black/50 h-full rounded-b-xl p-4">
                   <span ref={introTextEl} />
@@ -441,11 +441,11 @@ export default function MainScreen() {
             About me section
             =======================
          */}
-         <div id="aboutme" className="w-full p-10">
+         <div id="aboutme" className="w-full">
             <motion.div
                initial="offScreenLeft"
                whileInView="onScreen"
-               viewport={{ once: true, amount: 0.8 }}
+               viewport={{ once: true, amount: 0.4 }}
                className="flex flex-col items-center space-y-2"
                variants={sectionAOS}
             >
@@ -458,21 +458,29 @@ export default function MainScreen() {
                   className="rounded-full"
                />
                {readMore ? (
-                  aboutMeParagraphs.map((para) => {
-                     return (
-                        <p
-                           key={para.slice(16)}
-                           className="w-2/5 indent-8 text-justify"
-                        >
-                           {para}
-                        </p>
-                     )
-                  })
+                  <>
+                     {aboutMeParagraphs.map((para) => {
+                        return (
+                           <p
+                              key={para.slice(16)}
+                              className="w-full xl:w-2/5 indent-8 text-justify"
+                           >
+                              {para}
+                           </p>
+                        )
+                     })}
+                     <p
+                        className="hover:underline"
+                        onClick={() => setReadMore(false)}
+                     >
+                        Show less ...
+                     </p>
+                  </>
                ) : (
                   <>
                      <p
                         key={aboutMeParagraphs[0].slice(16)}
-                        className="w-2/5 indent-8 text-justify"
+                        className="w-full xl:w-2/5 indent-8 text-justify"
                      >
                         {aboutMeParagraphs[0]}
                      </p>
@@ -490,16 +498,16 @@ export default function MainScreen() {
             Skills section
             =======================
          */}
-         <div id="skills" className="w-full p-10">
+         <div id="skills" className="w-full mt-10">
             <motion.div
                initial="offScreenRight"
                whileInView="onScreen"
-               viewport={{ once: true, amount: 0.8 }}
+               viewport={{ once: true, amount: 0.2 }}
                className="flex flex-col items-center space-y-10"
                variants={sectionAOS}
             >
                <p className="text-4xl">Skills</p>
-               <div className="w-3/5 flex flex-wrap gap-4 items-center">
+               <div className=" w-full xl:w-3/5 flex flex-wrap gap-4 justify-center items-center">
                   {mySkills.map((tech) => {
                      const { imgSrc, ref } = tech
                      return (
@@ -527,7 +535,7 @@ export default function MainScreen() {
          */}
          <div
             id="projects"
-            className=" w-full p-10 flex flex-col items-center space-y-8"
+            className=" w-full flex flex-col items-center space-y-8 mt-10"
          >
             <p className="text-4xl">Projects</p>
             {projects.map((proj) => {
@@ -539,11 +547,11 @@ export default function MainScreen() {
                      initial="offScreenLeft"
                      whileInView="onScreen"
                      viewport={{ once: true, amount: 0.4 }}
-                     className="bg-white/75 p-4 rounded-xl w-3/5 h-[36rem]"
+                     className="bg-white/75 p-4 rounded-xl w-full xl:w-3/5 h-[36rem]"
                      variants={sectionAOS}
                   >
                      <div className="flex text-black h-full space-x-4">
-                        <div className="flex flex-col w-1/2 space-y-4">
+                        <div className="flex flex-col w-full xl:w-1/2 space-y-4">
                            <p className="text-lg font-bold">{title}</p>
                            <p className="text-justify indent-8 overflow-auto">
                               {desc}
@@ -590,7 +598,7 @@ export default function MainScreen() {
                               )}
                            </div>
                         </div>
-                        <div className="w-1/2 p-2 rouneded-xl h-full relative">
+                        <div className="hidden xl:block w-1/2 p-2 rouneded-xl h-full relative">
                            <Carousel
                               showDots={true}
                               responsive={responsive}
