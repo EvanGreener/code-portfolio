@@ -1,5 +1,14 @@
 'use client'
-import { RefObject, useEffect, useMemo, useRef, useState } from 'react'
+import {
+   LegacyRef,
+   MutableRefObject,
+   RefAttributes,
+   RefObject,
+   useEffect,
+   useMemo,
+   useRef,
+   useState,
+} from 'react'
 import Typed from 'typed.js'
 import Particles, { initParticlesEngine } from '@tsparticles/react'
 import {
@@ -33,7 +42,6 @@ import tripCalendar from '../../public/tw/trip-calendar.png'
 import tripPlanner from '../../public/tw/trip-planner.png'
 
 import noImage from '../../public/no-image.jpeg'
-import { RxHamburgerMenu } from 'react-icons/rx'
 import { TfiDownload } from 'react-icons/tfi'
 import { MdEmail } from 'react-icons/md'
 
@@ -54,13 +62,10 @@ export type Project = {
 export default function MainScreen() {
    const introTextEl = useRef(null)
 
-   const aboutRef = useRef(null)
-   const skillsRef = useRef(null)
-   const projectsRef = useRef(null)
-
    const [init, setInit] = useState(false)
    const [readMore, setReadMore] = useState(false)
-   const [navIndicatorX, setNavIndicatorX] = useState(0)
+
+   const [sectionInView, setSectionInView] = useState('#intro')
 
    useEffect(() => {
       const typed = new Typed(introTextEl.current, {
@@ -356,11 +361,20 @@ export default function MainScreen() {
       },
    }
 
-   const navBarLinks: { href: string; section: string }[] = [
-      { href: '#intro', section: 'Intro' },
-      { href: '#aboutme', section: 'About' },
-      { href: '#skills', section: 'Skills' },
-      { href: '#projects', section: 'Projects' },
+   const introRef: LegacyRef<HTMLDivElement> | null = useRef(null)
+   const aboutMeRef: LegacyRef<HTMLDivElement> | null = useRef(null)
+   const skillsRef: LegacyRef<HTMLDivElement> | null = useRef(null)
+   const projectsRef: LegacyRef<HTMLDivElement> | null = useRef(null)
+
+   const navBarLinks: {
+      href: string
+      section: string
+      ref: LegacyRef<HTMLDivElement> | null
+   }[] = [
+      { href: '#intro', section: 'Intro', ref: introRef },
+      { href: '#aboutme', section: 'About', ref: aboutMeRef },
+      { href: '#skills', section: 'Skills', ref: skillsRef },
+      { href: '#projects', section: 'Projects', ref: projectsRef },
    ]
 
    return (
@@ -377,20 +391,23 @@ export default function MainScreen() {
             =======================
          */}
          <div
-            className="z-10 fixed top-8 left-0 right-0 text-black w-full flex justify-center"
+            className="z-10 fixed top-8 left-0 right-0 text-black w-full flex justify-center "
             style={{ paddingLeft: 'inherit', paddingRight: 'inherit' }}
          >
-            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-21 w-[325px] xl:w-1/4">
+            <div className="rounded-full bg-white/75 flex gap-2 justify-evenly  w-[325px] xl:w-1/4">
                {navBarLinks.map((link) => {
-                  const { href, section } = link
-                  return (
-                     <Link
-                        key={href}
-                        href={`/${href}`}
-                        className="rounded-full p-2 transition ease-in-out duration-300 hover:bg-slate-200 active:bg-slate-400"
-                     >
-                        {section}
+                  const { href, section, ref } = link
+                  return ref ? (
+                     <Link key={href} href={`/${href}`}>
+                        <div
+                           ref={ref}
+                           className="rounded-full p-2 transition ease-in-out duration-300 hover:bg-slate-200 active:bg-slate-400"
+                        >
+                           {section}
+                        </div>
                      </Link>
+                  ) : (
+                     <></>
                   )
                })}
             </div>
@@ -399,246 +416,324 @@ export default function MainScreen() {
             Intro section 
             =======================
          */}
-         <div
-            id="intro"
-            className="h-screen w-full flex flex-col items-center justify-end space-y-10 pb-10"
+         <motion.div
+            onViewportEnter={() => {
+               introRef != null &&
+                  !introRef.current?.classList.contains('bg-slate-200') &&
+                  introRef.current?.classList.toggle('bg-slate-200')
+
+               console.log('onViewportEnter')
+            }}
+            onViewportLeave={() => {
+               introRef != null &&
+                  introRef.current?.classList.contains('bg-slate-200') &&
+                  introRef.current?.classList.toggle('bg-slate-200')
+            }}
          >
-            <div className="w-full xl:w-3/5 h-1/2">
-               <div className="bg-slate-300 rounded-t-xl p-2"></div>
-               <div className="bg-black/50 h-full rounded-b-xl p-4">
-                  <span ref={introTextEl} />
+            <div
+               id="intro"
+               className="h-screen w-full flex flex-col items-center justify-end space-y-10 pb-10"
+            >
+               <div className="w-full xl:w-3/5 h-1/2">
+                  <div className="bg-slate-300 rounded-t-xl p-2"></div>
+                  <div className="bg-black/50 h-full rounded-b-xl p-4">
+                     <span ref={introTextEl} />
+                  </div>
+               </div>
+
+               <div className="flex space-x-10 items-center">
+                  <Link href={'https://github.com/EvanGreener'}>
+                     <Image
+                        src={
+                           'https://www.svgrepo.com/show/512317/github-142.svg'
+                        }
+                        height={50}
+                        width={50}
+                        alt="GitHub"
+                     />
+                  </Link>
+                  <Link href={'https://www.linkedin.com/in/evan-greenstein/'}>
+                     <Image
+                        src={'https://www.svgrepo.com/show/448234/linkedin.svg'}
+                        height={50}
+                        width={50}
+                        alt="LinkedIn"
+                     />
+                  </Link>
+                  <Link href={'/Evan_Greenstein_CV.pdf'} target="_blank">
+                     <TfiDownload size={40} />
+                  </Link>
+                  <Link href={'mailto:evanlg16@gmail.com'}>
+                     <MdEmail size={50} />
+                  </Link>
+               </div>
+               <div className="relative flex">
+                  <IoArrowDownOutline
+                     color="white"
+                     size={50}
+                     className="animate-ping absolute inline-flex opacity-75"
+                  />
+                  <IoArrowDownOutline
+                     color="white"
+                     size={50}
+                     className="relative inline-flex"
+                  />
                </div>
             </div>
-
-            <div className="flex space-x-10 items-center">
-               <Link href={'https://github.com/EvanGreener'}>
-                  <Image
-                     src={'https://www.svgrepo.com/show/512317/github-142.svg'}
-                     height={50}
-                     width={50}
-                     alt="GitHub"
-                  />
-               </Link>
-               <Link href={'https://www.linkedin.com/in/evan-greenstein/'}>
-                  <Image
-                     src={'https://www.svgrepo.com/show/448234/linkedin.svg'}
-                     height={50}
-                     width={50}
-                     alt="LinkedIn"
-                  />
-               </Link>
-               <Link href={'/Evan_Greenstein_CV.pdf'} target="_blank">
-                  <TfiDownload size={40} />
-               </Link>
-               <Link href={'mailto:evanlg16@gmail.com'}>
-                  <MdEmail size={50} />
-               </Link>
-            </div>
-            <div className="relative flex">
-               <IoArrowDownOutline
-                  color="white"
-                  size={50}
-                  className="animate-ping absolute inline-flex opacity-75"
-               />
-               <IoArrowDownOutline
-                  color="white"
-                  size={50}
-                  className="relative inline-flex"
-               />
-            </div>
-         </div>
+         </motion.div>
 
          {/* 
             About me section
             =======================
          */}
-         <div id="aboutme" className="w-full">
-            <motion.div
-               initial="offScreenLeft"
-               whileInView="onScreen"
-               viewport={{ once: true, amount: 0.4 }}
-               className="flex flex-col items-center space-y-2"
-               variants={sectionAOS}
-            >
-               <p className="text-4xl">About me</p>
-               <Image
-                  src={'/profile.jpg'}
-                  width={400}
-                  height={400}
-                  alt="profile pic"
-                  className="rounded-full"
-               />
-               {readMore ? (
-                  <>
-                     {aboutMeParagraphs.map((para) => {
-                        return (
-                           <p
-                              key={para.slice(16)}
-                              className="w-full xl:w-2/5 indent-8 text-justify"
-                           >
-                              {para}
-                           </p>
-                        )
-                     })}
-                     <p
-                        className="hover:underline"
-                        onClick={() => setReadMore(false)}
-                     >
-                        Show less ...
-                     </p>
-                  </>
-               ) : (
-                  <>
-                     <p
-                        key={aboutMeParagraphs[0].slice(16)}
-                        className="w-full xl:w-2/5 indent-8 text-justify"
-                     >
-                        {aboutMeParagraphs[0]}
-                     </p>
-                     <p
-                        className="hover:underline"
-                        onClick={() => setReadMore(true)}
-                     >
-                        Read More ...
-                     </p>
-                  </>
-               )}
-            </motion.div>
-         </div>
+         <motion.div
+            onViewportEnter={() => {
+               introRef != null &&
+                  introRef.current?.classList.contains('bg-slate-200') &&
+                  introRef.current?.classList.toggle('bg-slate-200')
+
+               skillsRef != null &&
+                  skillsRef.current?.classList.contains('bg-slate-200') &&
+                  skillsRef.current?.classList.toggle('bg-slate-200')
+
+               aboutMeRef != null &&
+                  !aboutMeRef.current?.classList.contains('bg-slate-200') &&
+                  aboutMeRef.current?.classList.toggle('bg-slate-200')
+            }}
+            onViewportLeave={() => {
+               aboutMeRef != null &&
+                  aboutMeRef.current?.classList.contains('bg-slate-200') &&
+                  aboutMeRef.current?.classList.toggle('bg-slate-200')
+            }}
+         >
+            <div id="aboutme" className="w-full">
+               <motion.div
+                  initial="offScreenLeft"
+                  whileInView="onScreen"
+                  viewport={{ once: true, amount: 0.4 }}
+                  className="flex flex-col items-center space-y-2"
+                  variants={sectionAOS}
+               >
+                  <p className="text-4xl">About me</p>
+                  <Image
+                     src={'/profile.jpg'}
+                     width={400}
+                     height={400}
+                     alt="profile pic"
+                     className="rounded-full"
+                  />
+                  {readMore ? (
+                     <>
+                        {aboutMeParagraphs.map((para) => {
+                           return (
+                              <p
+                                 key={para.slice(16)}
+                                 className="w-full xl:w-2/5 indent-8 text-justify"
+                              >
+                                 {para}
+                              </p>
+                           )
+                        })}
+                        <p
+                           className="hover:underline"
+                           onClick={() => setReadMore(false)}
+                        >
+                           Show less ...
+                        </p>
+                     </>
+                  ) : (
+                     <>
+                        <p
+                           key={aboutMeParagraphs[0].slice(16)}
+                           className="w-full xl:w-2/5 indent-8 text-justify"
+                        >
+                           {aboutMeParagraphs[0]}
+                        </p>
+                        <p
+                           className="hover:underline"
+                           onClick={() => setReadMore(true)}
+                        >
+                           Read More ...
+                        </p>
+                     </>
+                  )}
+               </motion.div>
+            </div>
+         </motion.div>
+
          {/* 
             Skills section
             =======================
          */}
-         <div id="skills" className="w-full mt-10">
-            <motion.div
-               initial="offScreenRight"
-               whileInView="onScreen"
-               viewport={{ once: true, amount: 0.2 }}
-               className="flex flex-col items-center space-y-10"
-               variants={sectionAOS}
-            >
-               <p className="text-4xl">Skills</p>
-               <div className=" w-full xl:w-3/5 flex flex-wrap gap-4 justify-center items-center">
-                  {mySkills.map((tech) => {
-                     const { imgSrc, ref } = tech
-                     return (
-                        <div
-                           key={imgSrc}
-                           className="bg-white/75 rounded-xl p-4"
-                        >
-                           <Link href={ref} target="_blank">
-                              <Image
-                                 src={imgSrc}
-                                 height={50}
-                                 width={50}
-                                 alt="tech"
-                              />
-                           </Link>
-                        </div>
-                     )
-                  })}
-               </div>
-            </motion.div>
-         </div>
+         <motion.div
+            onViewportEnter={() => {
+               aboutMeRef != null &&
+                  aboutMeRef.current?.classList.contains('bg-slate-200') &&
+                  aboutMeRef.current?.classList.toggle('bg-slate-200')
+
+               projectsRef != null &&
+                  projectsRef.current?.classList.contains('bg-slate-200') &&
+                  projectsRef.current?.classList.toggle('bg-slate-200')
+
+               skillsRef != null &&
+                  !skillsRef.current?.classList.contains('bg-slate-200') &&
+                  skillsRef.current?.classList.toggle('bg-slate-200')
+            }}
+            onViewportLeave={() => {
+               skillsRef != null &&
+                  skillsRef.current?.classList.contains('bg-slate-200') &&
+                  skillsRef.current?.classList.toggle('bg-slate-200')
+            }}
+         >
+            <div id="skills" className="w-full mt-10">
+               <motion.div
+                  initial="offScreenRight"
+                  whileInView="onScreen"
+                  viewport={{ once: true, amount: 0.2 }}
+                  className="flex flex-col items-center space-y-10"
+                  variants={sectionAOS}
+               >
+                  <p className="text-4xl">Skills</p>
+                  <div className=" w-full xl:w-3/5 flex flex-wrap gap-4 justify-center items-center">
+                     {mySkills.map((tech) => {
+                        const { imgSrc, ref } = tech
+                        return (
+                           <div
+                              key={imgSrc}
+                              className="bg-white/75 rounded-xl p-4"
+                           >
+                              <Link href={ref} target="_blank">
+                                 <Image
+                                    src={imgSrc}
+                                    height={50}
+                                    width={50}
+                                    alt="tech"
+                                 />
+                              </Link>
+                           </div>
+                        )
+                     })}
+                  </div>
+               </motion.div>
+            </div>
+         </motion.div>
+
          {/* 
             Projects section
             =======================
          */}
-         <div
-            id="projects"
-            className=" w-full flex flex-col items-center space-y-8 mt-10"
-         >
-            <p className="text-4xl">Projects</p>
-            {projects.map((proj) => {
-               const { title, desc, github, tags, imgSrcs, ref } = proj
+         <motion.div
+            onViewportEnter={() => {
+               skillsRef != null &&
+                  skillsRef.current?.classList.contains('bg-slate-300') &&
+                  skillsRef.current?.classList.toggle('bg-slate-300')
 
-               return (
-                  <motion.div
-                     key={title}
-                     initial="offScreenLeft"
-                     whileInView="onScreen"
-                     viewport={{ once: true, amount: 0.4 }}
-                     className="bg-white/75 p-4 rounded-xl w-full xl:w-3/5 h-[36rem]"
-                     variants={sectionAOS}
-                  >
-                     <div className="flex text-black h-full space-x-4">
-                        <div className="flex flex-col w-full md:w-1/2 space-y-4">
-                           <p className="text-lg font-bold">{title}</p>
-                           <p className="text-justify indent-8 overflow-auto">
-                              {desc}
-                           </p>
-                           <p>
-                              <span className="flex flex-wrap gap-2">
-                                 <span className="p-2">Tags:</span>
-                                 {tags.map((tag) => {
-                                    return (
-                                       <span
-                                          key={tag}
-                                          className="bg-slate-200/75 rounded-xl p-2"
-                                       >
-                                          {tag}
-                                       </span>
-                                    )
-                                 })}
-                              </span>
-                           </p>
-                           <div className="flex gap-8 items-center">
-                              <Link
-                                 href={github}
-                                 className="bg-slate-200/75 border-2 border-black rounded-xl flex p-2 gap-2 items-center"
-                                 target="_blank"
-                              >
-                                 <Image
-                                    src={
-                                       'https://www.svgrepo.com/show/512317/github-142.svg'
-                                    }
-                                    alt="Github repo"
-                                    width={25}
-                                    height={25}
-                                 />
-                                 <span>GitHub Repo</span>
-                              </Link>
-                              {ref && (
+               projectsRef != null &&
+                  !projectsRef.current?.classList.contains('bg-slate-300') &&
+                  projectsRef.current?.classList.toggle('bg-slate-300')
+            }}
+            onViewportLeave={() => {
+               projectsRef != null &&
+                  projectsRef.current?.classList.contains('bg-slate-300') &&
+                  projectsRef.current?.classList.toggle('bg-slate-300')
+            }}
+         >
+            <div
+               id="projects"
+               className=" w-full flex flex-col items-center space-y-8 mt-10"
+            >
+               <p className="text-4xl">Projects</p>
+               {projects.map((proj) => {
+                  const { title, desc, github, tags, imgSrcs, ref } = proj
+
+                  return (
+                     <motion.div
+                        key={title}
+                        initial="offScreenLeft"
+                        whileInView="onScreen"
+                        viewport={{ once: true, amount: 0.4 }}
+                        className="bg-white/75 p-4 rounded-xl w-full xl:w-3/5 h-[36rem]"
+                        variants={sectionAOS}
+                     >
+                        <div className="flex text-black h-full space-x-4">
+                           <div className="flex flex-col w-full md:w-1/2 space-y-4">
+                              <p className="text-lg font-bold">{title}</p>
+                              <p className="text-justify indent-8 overflow-auto">
+                                 {desc}
+                              </p>
+                              <p>
+                                 <span className="flex flex-wrap gap-2">
+                                    <span className="p-2">Tags:</span>
+                                    {tags.map((tag) => {
+                                       return (
+                                          <span
+                                             key={tag}
+                                             className="bg-slate-200/75 rounded-xl p-2"
+                                          >
+                                             {tag}
+                                          </span>
+                                       )
+                                    })}
+                                 </span>
+                              </p>
+                              <div className="flex gap-8 items-center">
                                  <Link
-                                    href={ref}
+                                    href={github}
                                     className="bg-slate-200/75 border-2 border-black rounded-xl flex p-2 gap-2 items-center"
                                     target="_blank"
                                  >
-                                    <span>Live</span>
+                                    <Image
+                                       src={
+                                          'https://www.svgrepo.com/show/512317/github-142.svg'
+                                       }
+                                       alt="Github repo"
+                                       width={25}
+                                       height={25}
+                                    />
+                                    <span>GitHub Repo</span>
                                  </Link>
-                              )}
+                                 {ref && (
+                                    <Link
+                                       href={ref}
+                                       className="bg-slate-200/75 border-2 border-black rounded-xl flex p-2 gap-2 items-center"
+                                       target="_blank"
+                                    >
+                                       <span>Live</span>
+                                    </Link>
+                                 )}
+                              </div>
+                           </div>
+                           <div className="hidden md:block w-1/2 p-2 rouneded-xl h-full relative">
+                              <Carousel
+                                 showDots={true}
+                                 responsive={responsive}
+                                 containerClass="carousel-container"
+                                 sliderClass="carousel-track"
+                              >
+                                 {imgSrcs !== undefined ? (
+                                    imgSrcs.map((src) => {
+                                       return (
+                                          <Image
+                                             key={src.src}
+                                             src={src}
+                                             alt="project img"
+                                             sizes="33vw"
+                                             fill
+                                             style={{ objectFit: 'contain' }}
+                                          />
+                                       )
+                                    })
+                                 ) : (
+                                    <Image src={noImage} alt="project img" />
+                                 )}
+                              </Carousel>
                            </div>
                         </div>
-                        <div className="hidden md:block w-1/2 p-2 rouneded-xl h-full relative">
-                           <Carousel
-                              showDots={true}
-                              responsive={responsive}
-                              containerClass="carousel-container"
-                              sliderClass="carousel-track"
-                           >
-                              {imgSrcs !== undefined ? (
-                                 imgSrcs.map((src) => {
-                                    return (
-                                       <Image
-                                          key={src.src}
-                                          src={src}
-                                          alt="project img"
-                                          sizes="33vw"
-                                          fill
-                                          style={{ objectFit: 'contain' }}
-                                       />
-                                    )
-                                 })
-                              ) : (
-                                 <Image src={noImage} alt="project img" />
-                              )}
-                           </Carousel>
-                        </div>
-                     </div>
-                  </motion.div>
-               )
-            })}
-         </div>
+                     </motion.div>
+                  )
+               })}
+            </div>
+         </motion.div>
       </div>
    )
 }
