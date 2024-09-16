@@ -29,21 +29,13 @@ import { IoArrowDownOutline } from 'react-icons/io5'
 import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 
-import addBird from '../../public/bb/add-bird.png'
-import birdpediaEntry from '../../public/bb/birdpedia-entry.png'
-import birdpedia from '../../public/bb/birdpedia.png'
-import home from '../../public/bb/home.png'
-import leaderboard from '../../public/bb/leaderboard.png'
-
-import account from '../../public/tw/account.png'
-import loginEmail from '../../public/tw/login-email.png'
-import login from '../../public/tw/login.png'
-import tripCalendar from '../../public/tw/trip-calendar.png'
-import tripPlanner from '../../public/tw/trip-planner.png'
-
 import noImage from '../../public/no-image.jpeg'
 import { TfiDownload } from 'react-icons/tfi'
 import { MdEmail } from 'react-icons/md'
+
+import projects from '@/content/projects'
+import skills from '@/content/skills'
+import aboutMeParagraphs from '@/content/aboutMe'
 
 export type NavElement = {
    text: string
@@ -64,8 +56,6 @@ export default function MainScreen() {
 
    const [init, setInit] = useState(false)
    const [readMore, setReadMore] = useState(false)
-
-   const [sectionInView, setSectionInView] = useState('#intro')
 
    useEffect(() => {
       const typed = new Typed(introTextEl.current, {
@@ -187,168 +177,6 @@ export default function MainScreen() {
          },
       },
    }
-   const aboutMeParagraphs = [
-      `As a passionate student pursuing Software 
-      Engineering at Concordia University, coupled with my prior 
-      studies in Computer Science at Dawson College, I am deeply 
-      immersed in the world of technology.`,
-
-      `With a keen eye for detail and a love for problem-solving, I have found my niche 
-      in full-stack web development. From crafting intuitive user interfaces 
-      to architecting robust backend systems, I enjoy the balance of 
-      creativity and functionality. `,
-
-      `Currently honing my skills at 
-      Concordia University, I eagerly anticipate the opportunity 
-      to apply my knowledge and passion to real-world projects. 
-      I am driven by a desire to continuously learn and grow, 
-      exploring emerging technologies and embracing new challenges
-      with enthusiasm.`,
-
-      `I am always open to connecting with like-minded 
-      individuals, discussing innovative ideas, and collaborating 
-      on projects that push the boundaries of what technology 
-      can achieve. Let's connect and explore the endless 
-      possibilities together`,
-   ]
-
-   const mySkills: { imgSrc: string; ref: string }[] = [
-      {
-         imgSrc: 'https://www.svgrepo.com/show/355190/reactjs.svg',
-         ref: 'https://react.dev/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/448236/linux.svg',
-         ref: 'https://en.wikipedia.org/wiki/Linux',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/353925/javascript.svg',
-         ref: 'https://simple.wikipedia.org/wiki/JavaScript',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/378440/nextjs-fill.svg',
-         ref: 'https://nextjs.org/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452234/java.svg',
-         ref: 'https://www.java.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452192/docker.svg',
-         ref: 'https://www.docker.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/512317/github-142.svg',
-         ref: 'https://github.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452184/csharp.svg',
-         ref: 'https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/overview',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452210/git.svg',
-         ref: 'https://git-scm.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452091/python.svg',
-         ref: 'https://www.python.org/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/374146/typescript-official.svg',
-         ref: 'https://www.typescriptlang.org/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/373595/firebase.svg',
-         ref: 'https://firebase.google.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/354200/postgresql.svg',
-         ref: 'https://www.postgresql.org/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/373701/jest-snapshot.svg',
-         ref: 'https://jestjs.io/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452156/angular.svg',
-         ref: 'https://angularjs.org/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/373542/cypress.svg',
-         ref: 'https://www.cypress.io/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/330398/express.svg',
-         ref: 'https://expressjs.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/452241/jira.svg',
-         ref: 'https://www.atlassian.com/software/jira',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/374118/tailwind.svg',
-         ref: 'https://tailwindcss.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/331488/mongodb.svg',
-         ref: 'https://www.mongodb.com/',
-      },
-      {
-         imgSrc: 'https://www.svgrepo.com/show/448266/aws.svg',
-         ref: 'https://aws.amazon.com/',
-      },
-      {
-         imgSrc:
-            'https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png',
-         ref: 'https://rxjs.dev/',
-      },
-   ]
-
-   const projects: {
-      title: string
-      desc: string
-      github: string
-      tags: string[]
-      imgSrcs?: StaticImageData[]
-      ref?: string
-   }[] = [
-      {
-         title: 'Backyard buddiez (solo project)',
-         desc: `A bird tracking app/game for everyone! Made with Next.js and Supabase. Use an app like Merlin to 
-         identify a bird you've spotted, then enter the name of the bird you've IDd and the app will automatically a
-         dd your sighting. The app will let you know if your Birdpedia gained a new entry! 
-         Look back on all the previous birds you've IDd. Click on one get information and various statistics on it!
-         By identifying birds and completing the daily challenges, you earn points. You get 500 points for each new 
-         bird you ID and 100 points for every daily challenge you complete. See how you stack up against your friends and the world!
-         When you ID a bird, if your sighting fit one or more of the daily challenges you can check off those challenges 
-         before adding your sighting! Your daily challenge progress will updated and shown on the home screen!`,
-         github: 'https://github.com/EvanGreener/backyard-buddiez',
-         tags: [
-            'Next.js',
-            'Supabase',
-            'PostgreSQL',
-            'drizzle-orm',
-            'React',
-            'SPARQL',
-         ],
-         imgSrcs: [home, leaderboard, addBird, birdpedia, birdpediaEntry],
-         ref: 'https://backyard-buddiez.vercel.app/',
-      },
-      {
-         title: 'TripWise',
-         desc: `A web and mobile application that recommends activities and 
-         restaurants based on your interests. Once the app generates the recommended
-         restaurants/activites, the app displays a calendar which shows when to go to
-         each activity. The user can also click on any entry in the calendar to open
-         Google Maps to see the location. Before the app generates recommendations,
-         the app accesses your Google calandar (if you signed in with Google) to
-         ensure that the generated activities don't conflict with other 
-         appointments/events`,
-         github: 'https://github.com/mattmazzone/engr-490',
-         tags: ['React Native', 'Expo', 'Firebase', 'Python', 'Google APIs'],
-         imgSrcs: [login, loginEmail, tripPlanner, tripCalendar, account],
-      },
-   ]
 
    const responsive = {
       superLargeDesktop: {
@@ -376,6 +204,18 @@ export default function MainScreen() {
       { href: '#skills', section: 'Skills', ref: skillsRef },
       { href: '#projects', section: 'Projects', ref: projectsRef },
    ]
+
+   const addClasesToRef = (ref: RefObject<HTMLDivElement>) => {
+      ref != null &&
+         !ref.current?.classList.contains('bg-slate-300') &&
+         ref.current?.classList.toggle('bg-slate-300')
+   }
+
+   const removeClassesFromRef = (ref: RefObject<HTMLDivElement>) => {
+      ref != null &&
+         ref.current?.classList.contains('bg-slate-300') &&
+         ref.current?.classList.toggle('bg-slate-300')
+   }
 
    return (
       <div className="bg-indigo-950 w-full p-4 overscroll-contain overflow-hidden">
@@ -418,16 +258,11 @@ export default function MainScreen() {
          */}
          <motion.div
             onViewportEnter={() => {
-               introRef != null &&
-                  !introRef.current?.classList.contains('bg-slate-200') &&
-                  introRef.current?.classList.toggle('bg-slate-200')
-
-               console.log('onViewportEnter')
+               removeClassesFromRef(aboutMeRef)
+               addClasesToRef(introRef)
             }}
             onViewportLeave={() => {
-               introRef != null &&
-                  introRef.current?.classList.contains('bg-slate-200') &&
-                  introRef.current?.classList.toggle('bg-slate-200')
+               removeClassesFromRef(introRef)
             }}
          >
             <div
@@ -488,22 +323,12 @@ export default function MainScreen() {
          */}
          <motion.div
             onViewportEnter={() => {
-               introRef != null &&
-                  introRef.current?.classList.contains('bg-slate-200') &&
-                  introRef.current?.classList.toggle('bg-slate-200')
-
-               skillsRef != null &&
-                  skillsRef.current?.classList.contains('bg-slate-200') &&
-                  skillsRef.current?.classList.toggle('bg-slate-200')
-
-               aboutMeRef != null &&
-                  !aboutMeRef.current?.classList.contains('bg-slate-200') &&
-                  aboutMeRef.current?.classList.toggle('bg-slate-200')
+               removeClassesFromRef(introRef)
+               removeClassesFromRef(skillsRef)
+               addClasesToRef(aboutMeRef)
             }}
             onViewportLeave={() => {
-               aboutMeRef != null &&
-                  aboutMeRef.current?.classList.contains('bg-slate-200') &&
-                  aboutMeRef.current?.classList.toggle('bg-slate-200')
+               removeClassesFromRef(aboutMeRef)
             }}
          >
             <div id="aboutme" className="w-full">
@@ -567,25 +392,15 @@ export default function MainScreen() {
          */}
          <motion.div
             onViewportEnter={() => {
-               aboutMeRef != null &&
-                  aboutMeRef.current?.classList.contains('bg-slate-200') &&
-                  aboutMeRef.current?.classList.toggle('bg-slate-200')
-
-               projectsRef != null &&
-                  projectsRef.current?.classList.contains('bg-slate-200') &&
-                  projectsRef.current?.classList.toggle('bg-slate-200')
-
-               skillsRef != null &&
-                  !skillsRef.current?.classList.contains('bg-slate-200') &&
-                  skillsRef.current?.classList.toggle('bg-slate-200')
+               removeClassesFromRef(aboutMeRef)
+               removeClassesFromRef(projectsRef)
+               addClasesToRef(skillsRef)
             }}
             onViewportLeave={() => {
-               skillsRef != null &&
-                  skillsRef.current?.classList.contains('bg-slate-200') &&
-                  skillsRef.current?.classList.toggle('bg-slate-200')
+               removeClassesFromRef(skillsRef)
             }}
          >
-            <div id="skills" className="w-full mt-10">
+            <div id="skills" className="w-full mt-10 min-h-[75vh]">
                <motion.div
                   initial="offScreenRight"
                   whileInView="onScreen"
@@ -595,7 +410,7 @@ export default function MainScreen() {
                >
                   <p className="text-4xl">Skills</p>
                   <div className=" w-full xl:w-3/5 flex flex-wrap gap-4 justify-center items-center">
-                     {mySkills.map((tech) => {
+                     {skills.map((tech) => {
                         const { imgSrc, ref } = tech
                         return (
                            <div
@@ -624,18 +439,11 @@ export default function MainScreen() {
          */}
          <motion.div
             onViewportEnter={() => {
-               skillsRef != null &&
-                  skillsRef.current?.classList.contains('bg-slate-300') &&
-                  skillsRef.current?.classList.toggle('bg-slate-300')
-
-               projectsRef != null &&
-                  !projectsRef.current?.classList.contains('bg-slate-300') &&
-                  projectsRef.current?.classList.toggle('bg-slate-300')
+               removeClassesFromRef(skillsRef)
+               addClasesToRef(projectsRef)
             }}
             onViewportLeave={() => {
-               projectsRef != null &&
-                  projectsRef.current?.classList.contains('bg-slate-300') &&
-                  projectsRef.current?.classList.toggle('bg-slate-300')
+               removeClassesFromRef(projectsRef)
             }}
          >
             <div
