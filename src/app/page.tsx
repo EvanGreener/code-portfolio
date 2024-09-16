@@ -377,7 +377,7 @@ export default function MainScreen() {
             =======================
          */}
          <div
-            className="z-10 absolute top-8 left-0 right-0 text-black w-full flex justify-center"
+            className="z-10 fixed top-8 left-0 right-0 text-black w-full flex justify-center"
             style={{ paddingLeft: 'inherit', paddingRight: 'inherit' }}
          >
             <div className="rounded-full bg-white/75 flex gap-2 justify-evenly p-21 w-[325px] xl:w-1/4">
@@ -562,7 +562,7 @@ export default function MainScreen() {
                      variants={sectionAOS}
                   >
                      <div className="flex text-black h-full space-x-4">
-                        <div className="flex flex-col w-full xl:w-1/2 space-y-4">
+                        <div className="flex flex-col w-full md:w-1/2 space-y-4">
                            <p className="text-lg font-bold">{title}</p>
                            <p className="text-justify indent-8 overflow-auto">
                               {desc}
@@ -609,7 +609,7 @@ export default function MainScreen() {
                               )}
                            </div>
                         </div>
-                        <div className="hidden xl:block w-1/2 p-2 rouneded-xl h-full relative">
+                        <div className="hidden md:block w-1/2 p-2 rouneded-xl h-full relative">
                            <Carousel
                               showDots={true}
                               responsive={responsive}
