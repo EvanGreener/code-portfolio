@@ -31,3 +31,7 @@ div {
 .carousel-track {
     height: 100%;
 }
+
+canvas{
+    z-index: -10;
+}
